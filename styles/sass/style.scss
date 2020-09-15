@@ -50,6 +50,13 @@ a{
   padding-top:1.5rem;
   margin-bottom: .5rem;;
 }
+.startButton{
+  font-size: 2rem;
+}
+.startButton:hover,
+.startButton:focus{
+  font-size: 3rem;
+}
 .difficultyLevel{
   font-size: 2rem;
   margin-bottom: 2rem; 
