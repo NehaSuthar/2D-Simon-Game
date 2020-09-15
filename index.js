@@ -17,13 +17,13 @@ simonApp.matchMediaListner =[
 //----------------------to start the game on any key press-------------------//
 $(document).on('keypress',()=> {
   if (!simonApp.started) {
-    $(".game-title").text("Level " + simonApp.level);
+    $(".gameTitle").text("Level " + simonApp.level);
     simonApp.started = true;
     simonApp.nextSequence(simonApp.selectedOption);
   }
 });
 //---------------to store and compare user pattern with game pattern----------//
-$(".grid-container").on('click','.btn',function() {
+$(".gridContainer").on('click','.btn',function() {
   let userChosenColour = $(this).attr("id");//get the id of the div clicked by player
   simonApp.userClickedPattern.push(userChosenColour); 
   simonApp.playSound("green");
@@ -35,7 +35,7 @@ simonApp.startOver=()=>{
   simonApp.level = 0;
   simonApp.gamePattern = [];
   simonApp.started = false;
-  $('.game-title').text('Press any key to Start the Game');
+  $('.gameTitle').text('Press any key to Start the Game');
 }
 //----------------------to play sound --------------------------//
 simonApp.playSound = (color)=>{
@@ -54,7 +54,7 @@ simonApp.animatePress = (currentColor)=>{
 simonApp.nextSequence = (matrixSize)=>{
   simonApp.userClickedPattern = [];
   simonApp.level++;
-  $(".game-title").text("Level " + simonApp.level);
+  $(".gameTitle").text("Level " + simonApp.level);
   let randomNumber = Math.floor(Math.random() * (matrixSize*matrixSize));//generate random number between 0-3,0-8 or 0-15
   let randomChosenColour = simonApp.userSelectedMatrix[randomNumber];
   simonApp.gamePattern.push(randomChosenColour);
@@ -63,12 +63,12 @@ simonApp.nextSequence = (matrixSize)=>{
 }
 //----------------for default 2X2 matrix load at the start of the game---------------//
 simonApp.intialLoad =()=>{
-  $('#select-matrix').find('option:first').attr('selected', 'selected');
+  $('#selectMatrix').find('option:first').attr('selected', 'selected');
   simonApp.selectedOption  = parseInt($('option:first').val());
   simonApp.loadMatrix(simonApp.selectedOption );
 }
 //----------------event is trigger on difficulty level selection by user---------//
-$('#select-matrix').on('change',function(){
+$('#selectMatrix').on('change',function(){
   simonApp.startOver();
   simonApp.selectedOption = parseInt($(this).val());
   simonApp.loadMatrix(simonApp.selectedOption );
@@ -78,12 +78,12 @@ $('#select-matrix').on('change',function(){
 //input argument for the function is matrix size eg for 2X2 matrix, 2 will be passed--//
 simonApp.loadMatrix =(matrixSize)=>{
   simonApp.userSelectedMatrix = simonApp.buttonColours.slice(0,(matrixSize*matrixSize));
-  $('.grid-container').empty();
-  $('.grid-container').css('--row-num',matrixSize);
-  $('.grid-container').css('--col-num',matrixSize);
+  $('.gridContainer').empty();
+  $('.gridContainer').css('--row-num',matrixSize);
+  $('.gridContainer').css('--col-num',matrixSize);
   for(let i=0;i<simonApp.userSelectedMatrix.length;i++){
       const matrixDiv = $('<div>').addClass(`btn ${simonApp.userSelectedMatrix[i]}`).attr({"id":simonApp.userSelectedMatrix[i],"tabindex":i+3});
-      $('.grid-container').append(matrixDiv);
+      $('.gridContainer').append(matrixDiv);
     }
     for(let i=0;i<simonApp.matchMediaListner.length;i++){
       simonApp.mediaQueryUpdate(simonApp.matchMediaListner[i]);
@@ -100,11 +100,11 @@ simonApp.checkAnswer = (currentLevel) => {
     }
   } else {//user pattern is not equal to game pattern----End the game
     simonApp.playSound("wrong");
-    $("body").addClass("game-over");
-    $(".game-title").text("Game Over, Press Any Key to Restart");
+    $("body").addClass("gameOver");
+    $(".gameTitle").text("Game Over, Press Any Key to Restart");
 
     setTimeout(function () {
-      $("body").removeClass("game-over");
+      $("body").removeClass("gameOver");
     }, 200);
     simonApp.startOver();//to reset all the arrays and variables.
   }

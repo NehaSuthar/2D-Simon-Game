@@ -250,7 +250,7 @@ a {
   margin: 0 auto;
 }
 
-.grid-container {
+.gridContainer {
   --row-num:2;
   --col-num:2;
   display: -ms-grid;
@@ -276,18 +276,18 @@ a {
   border-radius: 20%;
 }
 
-.game-title,
-.difficulty-level {
+.gameTitle,
+.difficultyLevel {
   line-height: 6rem;
 }
 
-.game-title {
+.gameTitle {
   font-size: 4rem;
   padding-top: 1.5rem;
   margin-bottom: .5rem;
 }
 
-.difficulty-level {
+.difficultyLevel {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
@@ -301,7 +301,7 @@ select {
   font-family: 'Press Start 2P', cursive;
 }
 
-.game-over {
+.gameOver {
   background-color: red;
   opacity: 0.8;
 }
@@ -387,10 +387,10 @@ footer p {
 }
 
 @media (max-width: 1050px) {
-  .game-title {
+  .gameTitle {
     font-size: 3.5rem;
   }
-  .difficulty-level {
+  .difficultyLevel {
     font-size: 1.75rem;
   }
   select {
@@ -402,10 +402,10 @@ footer p {
 }
 
 @media (max-width: 450px) {
-  .game-title {
+  .gameTitle {
     font-size: 3rem;
   }
-  .difficulty-level {
+  .difficultyLevel {
     font-size: 1.5rem;
   }
   .btn {

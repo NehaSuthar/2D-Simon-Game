@@ -23,7 +23,7 @@ a{
   min-width:320px;
   margin:0 auto;
 }
-.grid-container{
+.gridContainer{
   --row-num:2;//variable is set dynamically in index.js based on the user selection
   --col-num:2;//variable is set dynamically in index.js based on the user selection
   display:grid;
@@ -41,16 +41,16 @@ a{
   border: .5rem solid black;
   border-radius: 20%;
 }
-.game-title,
-.difficulty-level{
+.gameTitle,
+.difficultyLevel{
   line-height: 6rem;
 }
-.game-title{
+.gameTitle{
   font-size: 4rem;
   padding-top:1.5rem;
   margin-bottom: .5rem;;
 }
-.difficulty-level{
+.difficultyLevel{
   font-size: 2rem;
   margin-bottom: 2rem; 
 }
@@ -62,7 +62,7 @@ select{
   font-size:1.5rem;
   font-family: 'Press Start 2P', cursive;
 }
-.game-over {
+.gameOver {
   background-color: red;
   opacity: 0.8;
 }  
@@ -133,10 +133,10 @@ footer{
 }
 //----------------------------------media query------------------------//
 @media (max-width: 1050px){
-  .game-title{
+  .gameTitle{
     font-size: 3.5rem;
   }
-  .difficulty-level{
+  .difficultyLevel{
     font-size: 1.75rem;
   }
   select{
@@ -148,10 +148,10 @@ footer{
 
 }
 @media (max-width: 450px){
-  .game-title{
+  .gameTitle{
     font-size: 3rem;
   }
-  .difficulty-level{
+  .difficultyLevel{
     font-size: 1.5rem;
   }
   .btn {
