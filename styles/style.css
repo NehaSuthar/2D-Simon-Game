@@ -221,11 +221,6 @@ textarea {
   overflow: hidden;
 }
 
-:root {
-  --div-height:170px;
-  --div-width:170px;
-}
-
 html {
   font-size: 62.5%;
 }
@@ -240,7 +235,7 @@ body {
 }
 
 main {
-  height: 95vh;
+  min-height: calc(100vh - 4rem);
 }
 
 a {
@@ -270,12 +265,13 @@ a {
   -ms-flex-line-pack: center;
       align-content: center;
   grid-gap: 1rem;
-  margin: 3rem auto 0;
+  margin: 5rem auto 0;
+  padding-bottom: 4rem;
 }
 
 .btn {
-  height: var(--div-height);
-  width: var(--div-width);
+  height: 170px;
+  width: 170px;
   border: .5rem solid black;
   border-radius: 20%;
 }
@@ -293,7 +289,7 @@ a {
 
 .difficulty-level {
   font-size: 2rem;
-  margin-bottom: .5rem;
+  margin-bottom: 2rem;
 }
 
 select {
@@ -382,40 +378,37 @@ select {
 
 footer {
   background: #2c2c2c;
+  width: 100%;
+  height: 4rem;
 }
 
 footer p {
-  padding: 1.5rem 0;
+  padding: 2rem 0;
 }
 
 @media (max-width: 1050px) {
+  .game-title {
+    font-size: 3.5rem;
+  }
+  .difficulty-level {
+    font-size: 1.75rem;
+  }
+  select {
+    font-size: 1rem;
+  }
+  .btn {
+    border: .4rem solid black;
+  }
+}
+
+@media (max-width: 450px) {
   .game-title {
     font-size: 3rem;
   }
   .difficulty-level {
     font-size: 1.5rem;
   }
-  select {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 450px) {
-  .game-title {
-    font-size: 1.75rem;
-    line-height: 3rem;
-  }
-  .difficulty-level {
-    font-size: 1rem;
-    line-height: 3rem;
-  }
-  select {
-    margin-bottom: 3rem;
-  }
   .btn {
-    height: var(--div-height);
-    width: var(--div-width);
     border: .3rem solid black;
-    border-radius: 20%;
   }
 }
