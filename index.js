@@ -28,7 +28,8 @@ $(".gridContainer").on('click','.btn',function() {
   simonApp.userClickedPattern.push(userChosenColour); 
   simonApp.playSound("green");
   simonApp.animatePress(userChosenColour); 
-  simonApp.checkAnswer(simonApp.userClickedPattern.length-1);//checompar the game pattern with user pattern
+  if(simonApp.userClickedPattern !== null)
+    simonApp.checkAnswer(simonApp.userClickedPattern.length-1);//checompar the game pattern with user pattern
 });
 //--------------to nullify all arrays and variable at the end of the game-----//
 simonApp.startOver=()=>{
@@ -52,14 +53,16 @@ simonApp.animatePress = (currentColor)=>{
 //--------------to generate game pattern as per user selected difficulty level---//
 //input argument for the function is matrix size eg for 2X2 matrix, 2 will be passed--//
 simonApp.nextSequence = (matrixSize)=>{
-  simonApp.userClickedPattern = [];
-  simonApp.level++;
-  $(".gameTitle").text("Level " + simonApp.level);
-  let randomNumber = Math.floor(Math.random() * (matrixSize*matrixSize));//generate random number between 0-3,0-8 or 0-15
-  let randomChosenColour = simonApp.userSelectedMatrix[randomNumber];
-  simonApp.gamePattern.push(randomChosenColour);
-  $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);//to highlight random generated game pattern
-  simonApp.playSound("green");
+  if(matrixSize > 0){
+    simonApp.userClickedPattern = [];
+    simonApp.level++;
+    $(".gameTitle").text("Level " + simonApp.level);
+    let randomNumber = Math.floor(Math.random() * (matrixSize*matrixSize));//generate random number between 0-3,0-8 or 0-15
+    let randomChosenColour = simonApp.userSelectedMatrix[randomNumber];
+    simonApp.gamePattern.push(randomChosenColour);
+    $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);//to highlight random generated game pattern
+    simonApp.playSound("green");
+  }
 }
 //----------------for default 2X2 matrix load at the start of the game---------------//
 simonApp.intialLoad =()=>{
@@ -77,16 +80,18 @@ $('#selectMatrix').on('change',function(){
 //called from simonApp.intialLoad() and  $('#select-matrix').on('change',function()....//
 //input argument for the function is matrix size eg for 2X2 matrix, 2 will be passed--//
 simonApp.loadMatrix =(matrixSize)=>{
-  simonApp.userSelectedMatrix = simonApp.buttonColours.slice(0,(matrixSize*matrixSize));
-  $('.gridContainer').empty();
-  $('.gridContainer').css('--row-num',matrixSize);
-  $('.gridContainer').css('--col-num',matrixSize);
-  for(let i=0;i<simonApp.userSelectedMatrix.length;i++){
-      const matrixDiv = $('<div>').addClass(`btn ${simonApp.userSelectedMatrix[i]}`).attr({"id":simonApp.userSelectedMatrix[i],"tabindex":i+3});
-      $('.gridContainer').append(matrixDiv);
-    }
-    for(let i=0;i<simonApp.matchMediaListner.length;i++){
-      simonApp.mediaQueryUpdate(simonApp.matchMediaListner[i]);
+  if(matrixSize >0){
+    simonApp.userSelectedMatrix = simonApp.buttonColours.slice(0,(matrixSize*matrixSize));
+    $('.gridContainer').empty();
+    $('.gridContainer').css('--row-num',matrixSize);
+    $('.gridContainer').css('--col-num',matrixSize);
+    for(let i=0;i<simonApp.userSelectedMatrix.length;i++){
+        const matrixDiv = $('<div>').addClass(`btn ${simonApp.userSelectedMatrix[i]}`).attr({"id":simonApp.userSelectedMatrix[i],"tabindex":i+3});
+        $('.gridContainer').append(matrixDiv);
+      }
+      for(let i=0;i<simonApp.matchMediaListner.length;i++){
+        simonApp.mediaQueryUpdate(simonApp.matchMediaListner[i]);
+      }
     }
 }
 //-------------function campare the user pattern with the game pattern----------//
@@ -141,12 +146,17 @@ simonApp.matrixDivSize = (sizePx)=>{
 }
 //---------call from document ready to intialize the default matrix--//
 simonApp.init = ()=>{
-  simonApp.intialLoad();//load default color matrix on website load/reload. 
-  for(let i=0;i<simonApp.matchMediaListner.length;i++){
-    simonApp.mediaQueryUpdate(simonApp.matchMediaListner[i]);//to set the intiall  matrix elements;s size as per current screen width
-    simonApp.matchMediaListner[i].addListener(simonApp.mediaQueryUpdate);//Attach listner to trigger function to set matrix element's size  run time on screen resize 
+  try{
+    simonApp.intialLoad();//load default color matrix on website load/reload. 
+    for(let i=0;i<simonApp.matchMediaListner.length;i++){
+      simonApp.mediaQueryUpdate(simonApp.matchMediaListner[i]);//to set the intiall  matrix elements;s size as per current screen width
+      simonApp.matchMediaListner[i].addListener(simonApp.mediaQueryUpdate);//Attach listner to trigger function to set matrix element's size  run time on screen resize 
+    }
+    $("span").text(new Date().getFullYear());//to set footer year dynamically
   }
-  $("span").text(new Date().getFullYear());//to set footer year dynamically
+  catch(e){
+    print("Caught: " + e.message);
+  }
 }
 //---------------------------document ready-------------------------//
 $(()=>{
