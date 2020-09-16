@@ -18,6 +18,7 @@ simonApp.matchMediaListner =[
 $(document).on('keypress',()=> {
   if (!simonApp.started) {
     $(".gameTitle").text("Level " + simonApp.level);
+    $('.startButton').hide();
     simonApp.started = true;
     simonApp.nextSequence(simonApp.selectedOption);
   }
@@ -25,6 +26,7 @@ $(document).on('keypress',()=> {
 $('.startButton').on('click',()=>{
   if (!simonApp.started) {
     $(".gameTitle").text("Level " + simonApp.level);
+     $('.startButton').hide();
     simonApp.started = true;
     simonApp.nextSequence(simonApp.selectedOption);
   }
@@ -44,6 +46,7 @@ simonApp.startOver=()=>{
   simonApp.gamePattern = [];
   simonApp.started = false;
   $('.gameTitle').text('Press any key to start the game or click');
+   $('.startButton').show();
 }
 //----------------------to play sound --------------------------//
 simonApp.playSound = (color)=>{
@@ -81,6 +84,7 @@ simonApp.intialLoad =()=>{
 $('#selectMatrix').on('change',function(){
   simonApp.startOver();
   simonApp.selectedOption = parseInt($(this).val());
+   $('.startButton').show();
   simonApp.loadMatrix(simonApp.selectedOption );
 });
 //-----------------function is called to laod the matrix as per the difficulty level--//
